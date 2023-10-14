@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="programs_rules_for_base_users" model="ir.rule">
+            <field name="name">Personal Programmes</field>
+            <field ref="model_programme_form" name="model_id"/>
+            <field name="domain_force">['|','|',('programme_coordinators','in',user.id), ('all_staffs','=',True), ('selected_staffs','in',user.employee_id.id)]</field>
+            <field name="groups" eval="[(4, ref('logic_programs.programme_users'))]"/>
+        </record>
+        <record id="programs_rules_for_programme_coordinator" model="ir.rule">
+            <field name="name">Programme Coordinators</field>
+            <field ref="model_programme_form" name="model_id"/>
+            <field name="domain_force">['|','|','|',('programme_coordinators','in',user.id), ('create_uid', '=', user.id), ('selected_staffs','in',user.employee_id.id), ('all_staffs','=',True)]</field>
+            <field name="groups" eval="[(4, ref('logic_programs.programme_coordinator'))]"/>
+        </record>
+    </data>
+</odoo>

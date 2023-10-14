@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+programme_access,access_details,model_programme_form,programme_coordinator,1,1,1,1
+programme_hall,access_details,model_programme_halls,programme_coordinator,1,1,1,1
+programme_access_hr,access_details,model_programme_form,programme_hr_manager,1,1,1,1
+programme_hall_hr,access_details,model_programme_halls,programme_hr_manager,1,1,1,1
+programme_access_base,access_details,model_programme_form,programme_users,1,0,0,0

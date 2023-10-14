@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="programme_logic_form_view" model="ir.ui.view">
+        <field name="name">Programme</field>
+        <field name="model">programme.form</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Programme">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                    <button name="action_schedule" string="Schedule" type="object" icon="fa-calendar"
+                            style="background-color: #329fc9" states="draft"/>
+<!--                    <button name="remove_activity" string="Remove Activity" type="object" icon="fa-trash"/>-->
+                </header>
+                <sheet>
+                    <div class="oe_title pr-0">
+                        <h1 class="d-flex flex-row justify-content-between">
+                            <field name="name" class="o_task_name text-truncate" placeholder="Programme Name..."
+                                   default_focus="1"/>
+
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group>
+                            <!--                            <field name="name"/>-->
+                            <field name="make_visible_user_pro" invisible="1"/>
+                            <field name="date"/>
+                            <field name="hall_id"/>
+                            <field name="location"/>
+                            <field name="programme_coordinators" widget="many2many_tags" attrs="{'invisible': [('make_visible_user_pro', '=', True)]}"/>
+
+
+                        </group>
+                        <group string="Participants" attrs="{'invisible': [('make_visible_user_pro', '=', True)]}">
+                            <field name="selected_staffs_only"/>
+
+                            <field name="all_staffs"/>
+                            <field name="selected_staffs"
+                                   attrs="{'invisible': [('selected_staffs_only', '=', False)], 'required' : [('selected_staffs_only', '=', True)]}"
+                                   widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <notebook attrs="{'invisible': [('make_visible_user_pro', '=', True)]}">
+                        <page string="Requirements" name="requirements">
+
+                            <field name="requirements" placeholder="Requirements"/>
+
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="tree_programme_form_view" model="ir.ui.view">
+        <field name="name">Programs</field>
+        <field name="model">programme.form</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="date"/>
+                <field name="hall_id"/>
+                <field name="location"/>
+                <field name="state" widget="badge" decoration-success="state == 'scheduled'"/>
+            </tree>
+
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="programme_action">
+        <field name="name">Programs</field>
+        <field name="res_model">programme.form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem name="Programmes"
+              id="programs_main_menu"
+              web_icon="logic_programs/static/description/icon.png"
+              sequence="10"/>
+
+    <menuitem name="Programmes" id="menu_sub_programme"
+              action="programme_action"
+              parent="programs_main_menu"
+              sequence="1"/>
+
+
+</odoo>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="programme_halls_logic_form_view" model="ir.ui.view">
+        <field name="name">Programme Hall</field>
+        <field name="model">programme.halls</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Programme">
+                <!--                <header>-->
+                <!--                    <field name="state" widget="statusbar"/>-->
+                <!--                    <button name="action_schedule" string="Schedule" type="object" icon="fa-calendar"-->
+                <!--                            style="background-color: #329fc9"/>-->
+                <!--                </header>-->
+                <sheet>
+                    <div class="oe_title pr-0">
+                        <h1 class="d-flex flex-row justify-content-between">
+                            <field name="name" class="o_task_name text-truncate" placeholder="Hall Name..."
+                                   default_focus="1"/>
+
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <!--                            <field name="name"/>-->
+                            <field name="size"/>
+                            <field name="location"/>
+                            <field name="capacity"/>
+                            <field name="layout"/>
+                        </group>
+                        <group string="Amenities">
+                            <field name="stage"/>
+                            <field name="lighting"/>
+                            <field name="sound_system"/>
+                            <field name="wifi"/>
+                            <field name="parking"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="tree_programme_hall_view" model="ir.ui.view">
+        <field name="name">Programs Halls</field>
+        <field name="model">programme.halls</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="location"/>
+            </tree>
+
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="programme_hall_action">
+        <field name="name">Programs Halls</field>
+        <field name="res_model">programme.halls</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem name="Programme Halls"
+              id="programme_halls_main_menu"
+              action="programme_hall_action"
+              parent="programs_main_menu"
+              sequence="3"/>
+
+</odoo>

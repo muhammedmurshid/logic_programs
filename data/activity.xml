@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="mail_programme_activity" model="mail.activity.type">
+            <field name="name">Programme Alert</field>
+            <field name="res_model_id" ref="logic_programs.model_programme_form"/>
+            <field name="delay_count">30</field>
+        </record>
+    </data>
+</odoo>
